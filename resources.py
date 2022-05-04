@@ -1,6 +1,6 @@
 
 
-class Rotorer():
+class Rotorer:
     
     def __init__(self,id,rotation,kombination) -> None:
         self.id = id
@@ -24,7 +24,7 @@ class Rotorer():
 
 
 
-class ActiveRotors():
+class ActiveRotors:
 
     def __init__(self,id) -> None:
         self.rotors = []
