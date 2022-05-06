@@ -22,6 +22,8 @@ class Rotorer:
             self.rotation = self.rotation + 1
             return 0
 
+    def reverse_rotate_rotor(self):
+        pass
 
 
 class ActiveRotors:

@@ -4,6 +4,7 @@ import random
 
 z = ActiveRotors(0)
 
+
 # transformer = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
 # 27,0,6,4,28,14,18,13,3,15,10,19,5,11,26,17,25,16,23,1,29,2,21,20,7,22,9,8,12,24,
 # def rotor_blend(transformer):
@@ -52,7 +53,7 @@ def krypting():
     print(ctypted)
 
 def key_create(choice):
-    key = []
+    key = [0]
     print("Nyckel segment x får vara 0 <= x <= 29")
     print("Skriv ett segment sen tryck return")
     for i in range(3):
@@ -60,7 +61,21 @@ def key_create(choice):
     if choice == 1:
         load_rotors(key)
     elif choice == 2:
+        
         pass
+
+def decrypt_calculator(text,key):
+    pass
+    if len(text) >= 841:
+        key[1] = key[1] + (len(text)/841) 
+    if len(text) >= 29:
+        key[2] = key[2] + (len(text)/29)
+    if len(text) >= 0:
+        key[3] = key[3] + len(text)
+
+
+
+
 
 def load_rotors(key):
     with open("rotors.txt", "r", encoding="utf8") as rotor_file:
@@ -73,7 +88,7 @@ def load_rotors(key):
     for i in range(1):
         z.add_rotor(Rotorer(i,key[0],kombination_txt[i]))
     for i in range(1,4):
-        z.add_rotor(Rotorer(i,key[i-2],kombination_txt[i]))
+        z.add_rotor(Rotorer(i,key[i],kombination_txt[i]))
     # for i in z.get_rotors():
     #     print(i.get_kombination())
 
