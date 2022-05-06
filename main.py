@@ -12,25 +12,21 @@ z = ActiveRotors(0)
 
 # rotor_blend(transformer)
 
-# def rotation(pos,x,rot,bigin):
-#     #pos 0
-#     #x list of rotor values 
-#     #rot 1
-#     #bigin 1
-#     if rot == 0:
-#         return x[rot].get_kombination()[pos]
-#     elif bigin == 0:
-#         pos = int(x[rot].get_kombination()[pos])
-#         rot = rot - 1
-#         rotation(pos,x,rot,bigin)
-#     elif rot == len(x)-1:
-#         bigin = 0
-#         pos = int(x[rot].get_kombination()[pos])
-#         rotation(pos,x,rot,bigin)
-#     else:
-#         pos = int(x[rot].get_kombination()[pos])
-#         rot = rot + 1 
-#         rotation(pos,x,rot,bigin)
+def rotation(pos,x,rot,bigin):
+    if rot == 0:
+        return x[rot].get_kombination()[pos]
+    elif bigin == 0:
+        pos = int(x[rot].get_kombination()[pos])
+        rot = rot - 1
+        return rotation(pos,x,rot,bigin)
+    elif rot == len(x)-1:
+        bigin = 0
+        pos = int(x[rot].get_kombination()[pos])
+        return rotation(pos,x,rot,bigin)
+    else:
+        pos = int(x[rot].get_kombination()[pos])
+        rot = rot + 1 
+        return rotation(pos,x,rot,bigin)
 
 
 
@@ -45,8 +41,8 @@ def krypting():
                 rot = 1
                 bigin = 1
                 #print(rotation(pos,x,rot,bigin))
-                #ctypted = ctypted + rotation(pos,x,rot,bigin)
-                ctypted = ctypted + x[0].get_kombination()[int(x[1].get_kombination()[int(x[2].get_kombination()[int(x[3].get_kombination()[int(x[3].get_kombination()[int(x[2].get_kombination()[int(x[1].get_kombination()[pos])])])])])])]
+                ctypted = ctypted + rotation(pos,x,rot,bigin)
+                # ctypted = ctypted + x[0].get_kombination()[int(x[1].get_kombination()[int(x[2].get_kombination()[int(x[3].get_kombination()[int(x[3].get_kombination()[int(x[2].get_kombination()[int(x[1].get_kombination()[pos])])])])])])]
                 for i in range(1,len(x)):
                     c = x[i].rotate_rotor()
                     if c == 0:
