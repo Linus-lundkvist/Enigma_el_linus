@@ -1,8 +1,10 @@
 
 from resources import Rotorer, ActiveRotors
+from math import floor
 import random
 
 z = ActiveRotors(0)
+
 
 
 # transformer = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
@@ -13,26 +15,46 @@ z = ActiveRotors(0)
 
 # rotor_blend(transformer)
 
-def rotation(pos,x,rot,bigin):
+def open_textfile():
+    with open('text_dokument.txt', "r", encoding="utf8" ) as txt_file:
+        contents = txt_file.read()
+        #print(contents)
+        contents.replace("\n", "")
+        return contents
+        #print(contents)
+        # with open('text_dokument2.txt', "w", encoding="utf8" ) as txt_file2:
+        #     txt_file2.write(contents)
+
+        # while True:
+        #     i = contents.find("\n")
+
+def new_text(contents):
+    with open('text_dokument2.txt', "w", encoding="utf8" ) as txt_file2:
+        txt_file2.write(contents)
+
+# open_textfile()
+
+def krypt(pos,x,rot,bigin):
     if rot == 0:
         return x[rot].get_kombination()[pos]
     elif bigin == 0:
         pos = int(x[rot].get_kombination()[pos])
         rot = rot - 1
-        return rotation(pos,x,rot,bigin)
+        return krypt(pos,x,rot,bigin)
     elif rot == len(x)-1:
         bigin = 0
         pos = int(x[rot].get_kombination()[pos])
-        return rotation(pos,x,rot,bigin)
+        return krypt(pos,x,rot,bigin)
     else:
         pos = int(x[rot].get_kombination()[pos])
         rot = rot + 1 
-        return rotation(pos,x,rot,bigin)
+        return krypt(pos,x,rot,bigin)
 
 
 
 def krypting():
-    text = input("Text: ")
+    #text = input("Text: ")
+    text = open_textfile()
     x = z.get_rotors()
     ctypted = ""
     for leter in text:
@@ -42,15 +64,16 @@ def krypting():
                 rot = 1
                 bigin = 1
                 #print(rotation(pos,x,rot,bigin))
-                ctypted = ctypted + rotation(pos,x,rot,bigin)
-                # ctypted = ctypted + x[0].get_kombination()[int(x[1].get_kombination()[int(x[2].get_kombination()[int(x[3].get_kombination()[int(x[3].get_kombination()[int(x[2].get_kombination()[int(x[1].get_kombination()[pos])])])])])])]
+                ctypted = ctypted + krypt(pos,x,rot,bigin)
+                #ctypted = ctypted + x[0].get_kombination()[int(x[1].get_kombination()[int(x[2].get_kombination()[int(x[3].get_kombination()[int(x[3].get_kombination()[int(x[2].get_kombination()[int(x[1].get_kombination()[pos])])])])])])]
                 for i in range(1,len(x)):
                     c = x[i].rotate_rotor()
                     if c == 0:
                         break
                 break
             pos = pos + 1
-    print(ctypted)
+    new_text(ctypted)
+
 
 def key_create(choice):
     key = [0]
@@ -65,13 +88,13 @@ def key_create(choice):
         pass
 
 def decrypt_calculator(text,key):
-    pass
+    pass  #                          <----------------------
     if len(text) >= 841:
-        key[1] = key[1] + (len(text)/841) 
+        key[1] = floor(key[1] + (len(text)/841)) 
     if len(text) >= 29:
-        key[2] = key[2] + (len(text)/29)
+        key[2] = floor(key[2] + (len(text)/29))
     if len(text) >= 0:
-        key[3] = key[3] + len(text)
+        key[3] = floor(key[3] + len(text))
 
 
 
@@ -129,3 +152,10 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# for i in range(1,len(x)):
+#     c = x[i].rotate_rotor()
+#     if c == 0:
+#         break
+#break

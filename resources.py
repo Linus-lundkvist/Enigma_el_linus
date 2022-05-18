@@ -23,7 +23,18 @@ class Rotorer:
             return 0
 
     def reverse_rotate_rotor(self):
-        pass
+        if self.rotation == 0:
+            self.rotation = 29
+            plaze = self.kombination[0]
+            self.kombination[0] = self.kombination[29]
+            self.kombination[29] = plaze
+            return 1
+        else:
+            plaze = self.kombination[0]
+            self.kombination[0] = self.kombination[29]
+            self.kombination[29] = plaze
+            self.rotation = self.rotation - 1
+            return 0
 
 
 class ActiveRotors:
